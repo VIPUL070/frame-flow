@@ -63,3 +63,54 @@ export const registeruser = async (req: Request, res: Response) => {
         })
     }
 }
+
+
+// USER LOGIN
+const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(1)
+})
+export const loginUser = async (req: Request, res: Response) => {
+    const response = loginSchema.safeParse(req.body);
+
+    if (!response.success) {
+        return res.status(411).json({
+            message: "Error in inputs"
+        })
+    }
+
+    const { email, password } = response.data;
+
+    try {
+        const user = await User.findOne({ email })
+
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid credentials"
+            })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password!)
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Invalid credentials"
+            })
+        }
+
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '14d' })
+
+        res.status(200).json({
+            message: "Login successful",
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error ' + (error as Error).message
+        })
+    }
+}
