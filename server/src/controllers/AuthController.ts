@@ -101,6 +101,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
         res.status(200).json({
             message: "Login successful",
+            token,
             user: {
                 _id: user._id,
                 name: user.name,
@@ -109,8 +110,35 @@ export const loginUser = async (req: Request, res: Response) => {
         })
 
     } catch (error) {
+        console.log(error)
         res.status(500).json({
-            message: 'Server Error ' + (error as Error).message
+            message: (error as Error).message
+        })
+    }
+}
+
+//VERIFY USER
+export const verifyuser = async (req: Request, res: Response) => {
+    try {
+
+        const { userId } = req
+        const user = await User.findById({ userId }).select('-password')
+
+        if (!user) {
+            return res.status(400).json({
+                messsage: "Invalid User!"
+            })
+        }
+
+        res.status(200).json({
+            message: "User verified successfully",
+            user
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: (error as Error).message
         })
     }
 }

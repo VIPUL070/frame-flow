@@ -6,7 +6,7 @@ import { User } from '../models/User.js';
 declare global {
   namespace Express {
     interface Request {
-      user?: InstanceType<typeof User> | null;
+      userId?: string;
     }
   }
 }
@@ -29,8 +29,8 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         const token = authHeader.split(" ")[1];
         const decoded = jwt.verify(token as string, JWT_SECRET as string)as jwt.JwtPayload
 
-        req.user = await User.findById(decoded.userId).select('-password');
-            if (!req.user) {
+        req.userId = decoded.userId;
+            if (!req.userId) {
                 return res.status(401).json({ message: 'Not authorized, user not found' });
             }
             next();
