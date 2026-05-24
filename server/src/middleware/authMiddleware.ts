@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import type { NextFunction, Request, Response } from "express";
-import { User } from '../models/User.js';
 
 declare global {
   namespace Express {

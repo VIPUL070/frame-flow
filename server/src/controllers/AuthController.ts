@@ -15,7 +15,7 @@ const userSchema = z.object({
     email: z.string().email(),
     password: z.string().min(1)
 })
-export const registeruser = async (req: Request, res: Response) => {
+export const registerUser = async (req: Request, res: Response) => {
     try {
         const parsedBody = userSchema.safeParse(req.body)
 
@@ -118,11 +118,11 @@ export const loginUser = async (req: Request, res: Response) => {
 }
 
 //VERIFY USER
-export const verifyuser = async (req: Request, res: Response) => {
+export const verifyUser = async (req: Request, res: Response) => {
     try {
 
         const { userId } = req
-        const user = await User.findById({ userId }).select('-password')
+        const user = await User.findById( userId ).select('-password')
 
         if (!user) {
             return res.status(400).json({
