@@ -14,7 +14,7 @@ export const generateThumbnail = async (req: Request, res: Response) => {
         const { userId } = req
 
         if (!userId) {
-            return res.status(411).json({
+            return res.status(401).json({
                 message: "User not authenticated"
             })
         }
@@ -144,13 +144,13 @@ export const deleteThumbnail = async (req: Request, res: Response) => {
         const { userId } = req
 
         if (!id) {
-            return res.status(403).json({
+            return res.status(400).json({
                 message: "Required id is not valid."
             })
         }
 
         if (!userId) {
-            return res.status(411).json({
+            return res.status(401).json({
                 message: "Unable to delete. User not authenticated"
             })
         }

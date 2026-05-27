@@ -20,7 +20,7 @@ export const registerUser = async (req: Request, res: Response) => {
         const parsedBody = userSchema.safeParse(req.body)
 
         if (!parsedBody.success) {
-            return res.status(411).json({
+            return res.status(400).json({
                 message: "Error in inputs"
             })
         }
@@ -74,7 +74,7 @@ export const loginUser = async (req: Request, res: Response) => {
     const response = loginSchema.safeParse(req.body);
 
     if (!response.success) {
-        return res.status(411).json({
+        return res.status(400).json({
             message: "Error in inputs"
         })
     }
@@ -85,14 +85,14 @@ export const loginUser = async (req: Request, res: Response) => {
         const user = await User.findOne({ email })
 
         if (!user) {
-            return res.status(400).json({
+            return res.status(401).json({
                 message: "Invalid credentials"
             })
         }
 
         const isMatch = await bcrypt.compare(password, user.password!)
         if (!isMatch) {
-            return res.status(400).json({
+            return res.status(401).json({
                 message: "Invalid credentials"
             })
         }
@@ -125,8 +125,8 @@ export const verifyUser = async (req: Request, res: Response) => {
         const user = await User.findById( userId ).select('-password')
 
         if (!user) {
-            return res.status(400).json({
-                messsage: "Invalid User!"
+            return res.status(401).json({
+                message: "Invalid User!"
             })
         }
 
