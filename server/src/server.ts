@@ -5,6 +5,7 @@ import cors from "cors";
 import authRouter from './routes/authRoute.js'
 import { connectDB } from "./config/db.js";
 import thumbnailRouter from "./routes/thumbnailRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 await connectDB();
 
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use('/api/auth', authRouter);
 app.use('/api/thumbnail' , thumbnailRouter);
+app.use('/api/user' , userRouter);
 
 app.listen(port , () => {
     console.log(`App listening on port ${port}`)
