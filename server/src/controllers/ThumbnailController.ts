@@ -137,3 +137,36 @@ export const generateThumbnail = async (req: Request, res: Response) => {
         }
     }
 }
+
+export const deleteThumbnail = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+        const { userId } = req
+
+        if (!id) {
+            return res.status(403).json({
+                message: "Required id is not valid."
+            })
+        }
+
+        if (!userId) {
+            return res.status(411).json({
+                message: "Unable to delete. User not authenticated"
+            })
+        }
+
+        await Thumbnail.findByIdAndDelete({
+            _id: id,
+            userId
+        })
+
+        res.status(200).json({
+            message: "Thumbnail deleted successfully."
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: (error as Error).message
+        })
+    }
+}
