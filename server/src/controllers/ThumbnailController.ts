@@ -34,7 +34,7 @@ export const generateThumbnail = async (req: Request, res: Response) => {
         })
 
         //DEFINE MODEL AND CONFIG
-        const model = 'gemini-3.5-flash';
+        const model = 'gemini-3-pro-image-preview';
         const generationConfig: GenerateContentConfig = {
             maxOutputTokens: 32768,
             temperature: 1,
@@ -54,7 +54,7 @@ export const generateThumbnail = async (req: Request, res: Response) => {
                     threshold: HarmBlockThreshold.OFF,
                 },
                 {
-                    category: HarmCategory.HARM_CATEGORY_IMAGE_SEXUALLY_EXPLICIT,
+                    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
                     threshold: HarmBlockThreshold.OFF,
                 },
                 {

@@ -43,5 +43,5 @@ body {
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "cv11", "ss01";
-  font-size: large;
+  font-size: small;
 }
