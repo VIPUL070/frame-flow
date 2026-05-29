@@ -1,5 +1,5 @@
 "use client";
-import DitherShader from "./dither-shader";
+import DitherShader from "./DitherShader";
 
 function DitherShaderMain() {
   return (
