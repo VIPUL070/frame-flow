@@ -1,0 +1,72 @@
+import Button from "@/ui/Button";
+import Input from "@/ui/Input";
+
+const SignupForm = () => {
+  return (
+    <div className="relative h-full w-full tracking-tight p-10 flex items-center justify-center">
+      <div className="w-[65%] relative flex flex-col items-center justify-center gap-2 px-2">
+        {/* Heading  */}
+        <div className="w-full">
+          <h1 className="text-black text-lg">Create an Account</h1>
+          <p className="text-[9px] text-stone-400">
+            You are few moments away from getting started!
+          </p>
+          <span className="text-black text-[9px] flex items-center text-center gap-1.5 justify-start pt-2">
+            <input type="checkbox" className="h-3 w-3" />
+            <p>Send me tips, updates and offers.</p>
+          </span>
+        </div>
+
+        {/* signup feilds  */}
+        <div className="w-full">
+          <form onSubmit={(e) => { e.preventDefault()}} >
+
+            <Input type="text" placeholder="Enter your name" label="Name" />
+            <Input type="text" placeholder="Enter your email" label="Email" />
+            <Input type="password" placeholder="••••••••" label="Password" />
+
+            <p className="text-[9px] text-stone-500 leading-normal pt-1 pr-6">
+              By signing up, you accept Frame Flow{" "}
+              <a
+                href="#"
+                className="underline underline-offset-2 text-stone-800 hover:text-black transition-colors"
+              >
+                privacy policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="#"
+                className="underline underline-offset-2 text-stone-800 hover:text-black transition-colors"
+              >
+                terms of services
+              </a>
+              .
+            </p>
+
+            <Button type="submit" variant="primary">Sign Up</Button>
+
+            <div className="relative flex p-1 items-center text-xs text-stone-300">
+              <div className="grow border-t border-stone-200"></div>
+              <span className="shrink mx-3 text-[9px] font-medium uppercase tracking-wide text-black">
+                or
+              </span>
+              <div className="grow border-t border-stone-200"></div>
+            </div>
+
+            <p className="text-[9px] text-stone-500 text-center">
+              Already have an account?{" "}
+              <a
+                href="#"
+                className="font-medium text-black underline underline-offset-4 hover:text-stone-700 transition-colors"
+              >
+                Log In
+              </a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignupForm;
