@@ -1,5 +1,5 @@
-import Dither from "@/components/Dither"
-import SignupForm from "@/components/SignupForm"
+import Dither from "@/components/Dither/Dither"
+import SignupForm from "@/components/AuthForm/SignupForm"
 
 const Signup = () => {
   return (
