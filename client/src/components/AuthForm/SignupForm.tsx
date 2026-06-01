@@ -48,7 +48,7 @@ const SignupForm = () => {
               .
             </p>
 
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" size="lg">
               Sign Up
             </Button>
 
