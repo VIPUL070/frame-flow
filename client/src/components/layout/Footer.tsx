@@ -43,7 +43,7 @@ const Footer = () => {
                 <h3 className="text-[9px] uppercase tracking-normal text-black">
                   {col.title}
                 </h3>
-                <ul className="flex flex-col gap-1.5 lg:gap-[1px]">
+                <ul className="flex flex-col gap-1.5 lg:gap-px">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <Link
