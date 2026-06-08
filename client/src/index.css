@@ -13,6 +13,9 @@
   --color-muted: #f1f3f7;
   --color-soft: #eef2f7;
   --color-offwhite: #f9fafb;
+  --color-blue:#0099ff;
+  --color-brand: #ff3b3f;
+  --color-brand-strong: #e61f24;
 
   /* Text */
   --color-foreground: #0a0a0a;
@@ -39,6 +42,29 @@
     0 2px 6px -2px rgba(15, 23, 42, 0.06);
 }
 
+.dark {
+  --color-canvas: #050505;
+  --color-panel: #0d0d0d;
+  --color-surface: #111111;
+  --color-input: #171717;
+  --color-muted: #181818;
+  --color-soft: #202020;
+  --color-offwhite: #f8fafc;
+  --color-foreground: #f8fafc;
+  --color-muted-foreground: #9aa6b8;
+  --color-subtle: #687385;
+  --color-border: #242424;
+  --color-border-strong: #343434;
+  --color-accent: #0099ff;
+  --color-success: #22c55e;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.28),
+    0 18px 44px -24px rgba(0, 0, 0, 0.78);
+  --shadow-float: 0 2px 4px rgba(0, 0, 0, 0.24),
+    0 24px 60px -28px rgba(0, 0, 0, 0.88);
+  --shadow-tab: 0 1px 2px rgba(0, 0, 0, 0.22),
+    0 8px 20px -14px rgba(0, 0, 0, 0.84);
+}
+
 html,
 body,
 #root {
@@ -53,4 +79,10 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "cv11", "ss01";
   font-size: smaller;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+::selection {
+  background-color: #b7dbf3;
+  color: #0099ff;
 }
