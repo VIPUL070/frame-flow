@@ -1,38 +1,29 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NAV_LINKS } from "../../data/home";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, GalleryThumbnails, Moon, Sun } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "../ui/Button";
+import { useTheme } from "../../hooks/useTheme";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+
+  const ThemeIcon = isDark ? Sun : Moon;
 
   return (
-    <header className="sticky top-0 z-50 border border-stone-300 bg-surface/80 backdrop-blur-md rounded-4xl px-4 sm:px-6 transition-all duration-300">
+    <header className="sticky top-0 z-50 rounded-4xl border border-border bg-surface/80 px-4 backdrop-blur-md transition-all duration-300 sm:px-6">
       <nav className="mx-auto flex max-w-6xl items-center justify-between py-1.5">
         <div className="flex items-center gap-7">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-1.5 justify-center hover:opacity-80 transition-opacity duration-200">
-            <span className="h-4 w-4 text-foreground">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="black"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-gallery-thumbnails-icon lucide-gallery-thumbnails drop-shadow-smrounded-xs"
-              >
-                <rect width="18" height="14" x="3" y="3" rx="2" />
-                <path d="M4 21h1" />
-                <path d="M9 21h1" />
-                <path d="M14 21h1" />
-                <path d="M19 21h1" />
-              </svg>
+          <Link
+            to="/"
+            className="flex items-center justify-center gap-1.5 text-foreground transition-opacity duration-200 hover:opacity-80"
+          >
+            <span className="flex h-4 w-4 items-center justify-center">
+              <GalleryThumbnails className="h-4.5 w-45 drop-shadow-sm" />
             </span>
             <span className="text-[11px] font-semibold tracking-tight text-foreground">
               Frame Flow
@@ -44,11 +35,13 @@ const Navbar = () => {
               <li key={item.label}>
                 <Link
                   to={item.href}
-                  className="group relative flex items-center justify-center gap-0.5 text-[10px] text-black transition-colors hover:text-stone-700 pb-1"
+                  className="group relative flex items-center justify-center gap-0.5 pb-1 text-[9px] text-foreground transition-colors hover:text-muted-foreground"
                 >
                   {item.label}
-                  <div className="absolute top-3.5 left-0 h-px w-0 bg-stone-700 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-full group-hover:opacity-100 origin-left rounded-sm" />
-                  {item.hasDropdown && <ChevronDown className="h-3 w-3 transition-transform duration-300 group-hover:translate-y-0.5" />}
+                  <div className="absolute left-0 top-3.5 h-px w-0 origin-left rounded-sm bg-foreground opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-full group-hover:opacity-100" />
+                  {item.hasDropdown && (
+                    <ChevronDown className="h-3 w-3 transition-transform duration-300 group-hover:translate-y-0.5" />
+                  )}
                 </Link>
               </li>
             ))}
@@ -56,6 +49,26 @@ const Navbar = () => {
         </div>
 
         <div className="hidden sm:flex items-center gap-2">
+          <motion.button
+            type="button"
+            onClick={toggleTheme}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.94 }}
+            className="relative flex h-7 w-7 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border bg-surface text-foreground transition-colors hover:bg-muted"
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={theme}
+                initial={{ y: 14, opacity: 0, rotate: -35 }}
+                animate={{ y: 0, opacity: 1, rotate: 0 }}
+                exit={{ y: -14, opacity: 0, rotate: 35 }}
+                transition={{ duration: 0.22 }}
+              >
+                <ThemeIcon className="h-3.5 w-3.5" />
+              </motion.span>
+            </AnimatePresence>
+          </motion.button>
           <Button
             size="sm"
             variant="secondary"
@@ -73,32 +86,45 @@ const Navbar = () => {
           </Button>
         </div>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex sm:hidden cursor-pointer flex-col justify-center items-center w-7 h-7 gap-1 relative z-50 text-black focus:outline-none"
-          type="button"
-        >
-          <span 
-            className={`h-[1.5px] bg-black rounded-full transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-              isOpen ? "w-5 rotate-45 translate-y-[5.5px]" : "w-4 origin-right ml-auto"
-            }`} 
-          />
-          <span 
-            className={`h-[1.5px] bg-black rounded-full transition-all duration-200 ease-out w-5 ${
-              isOpen ? "opacity-0 scale-0" : "opacity-100"
-            }`} 
-          />
-          <span 
-            className={`h-[1.5px] bg-black rounded-full transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-              isOpen ? "w-5 -rotate-45 translate-y-[-5.5px]" : "w-4 origin-right ml-auto"
-            }`} 
-          />
-        </button>
+        <div className="flex items-center gap-2 sm:hidden">
+          <motion.button
+            type="button"
+            onClick={toggleTheme}
+            whileTap={{ scale: 0.94 }}
+            className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border bg-surface text-foreground"
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            <ThemeIcon className="h-3.5 w-3.5" />
+          </motion.button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="relative z-50 flex h-7 w-7 cursor-pointer flex-col items-center justify-center gap-1 text-foreground focus:outline-none"
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            <span 
+              className={`h-[1.5px] rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                isOpen ? "w-5 rotate-45 translate-y-[5.5px]" : "w-4 origin-right ml-auto"
+              }`} 
+            />
+            <span 
+              className={`h-[1.5px] w-5 rounded-full bg-current transition-all duration-200 ease-out ${
+                isOpen ? "opacity-0 scale-0" : "opacity-100"
+              }`} 
+            />
+            <span 
+              className={`h-[1.5px] rounded-full bg-current transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                isOpen ? "w-5 -rotate-45 translate-y-[-5.5px]" : "w-4 origin-right ml-auto"
+              }`} 
+            />
+          </button>
+        </div>
       </nav>
 
       <div 
         className={`sm:hidden overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-          isOpen ? "max-h-87.5 opacity-100 border-t border-stone-200/60 py-6" : "max-h-0 opacity-0 pointer-events-none"
+          isOpen ? "max-h-87.5 opacity-100 border-t border-border py-6" : "max-h-0 opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex flex-col items-center text-center px-4">
@@ -114,11 +140,11 @@ const Navbar = () => {
                 <Link
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="group inline-flex items-center justify-center gap-1 text-[11px] font-medium tracking-wide text-stone-800 hover:text-black py-1 transition-colors"
+                  className="group inline-flex items-center justify-center gap-1 py-1 text-[9px] font-medium tracking-wide text-foreground transition-colors hover:text-muted-foreground"
                 >
                   {item.label}
                   {item.hasDropdown && (
-                    <ChevronDown className="h-3 w-3 text-stone-400 transition-transform duration-200 group-hover:translate-y-0.5" />
+                    <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform duration-200 group-hover:translate-y-0.5" />
                   )}
                 </Link>
               </li>
@@ -126,7 +152,7 @@ const Navbar = () => {
           </ul>
           
           <div 
-            className={`flex flex-col gap-2 w-full max-w-60 pt-4 border-t border-stone-100/80 transition-all duration-500 delay-200 transform ${
+            className={`flex w-full max-w-60 transform flex-col gap-2 border-t border-border pt-4 transition-all delay-200 duration-500 ${
               isOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
             }`}
           >
@@ -134,6 +160,7 @@ const Navbar = () => {
               size="sm"
               variant="secondary"
               type="button"
+              fullWidth
               onClick={() => {
                 setIsOpen(false);
                 navigate("/login");
@@ -144,6 +171,7 @@ const Navbar = () => {
             <Button 
               size="sm" 
               type="button" 
+              fullWidth
               onClick={() => {
                 setIsOpen(false);
                 navigate("/register");
