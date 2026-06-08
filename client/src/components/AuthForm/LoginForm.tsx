@@ -20,7 +20,9 @@ const LoginForm = () => {
             <Input type="text" placeholder="Enter your email" label="Email" />
             <Input type="password" placeholder="••••••••" label="Password" />
 
-            <Button type="submit" variant="primary" size="lg">Log In</Button>
+            <Button type="submit" variant="form" size="sm" fullWidth className="my-4">
+              Log In
+            </Button>
 
             <div className="relative flex p-1 items-center text-xs text-stone-300">
               <div className="grow border-t border-stone-200"></div>
