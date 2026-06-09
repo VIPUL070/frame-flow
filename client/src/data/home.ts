@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import type {
   NavItem,
-  TeamMember,
   FaqItemData,
   FooterColumn,
   WorkflowStepData,
@@ -33,40 +32,6 @@ export const NAV_LINKS: NavItem[] = [
   { label: "My generations", href: "/my-generations" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact Us", href: "/contact" },
-];
-
-export const TEAM: TeamMember[] = [
-  {
-    id: "olivia",
-    name: "Olivia Martinez",
-    role: "Payments Support",
-    image: "https://i.pravatar.cc/400?img=47",
-  },
-  {
-    id: "richard",
-    name: "Richard Mills",
-    role: "Payments Support",
-    image: "https://i.pravatar.cc/400?img=12",
-  },
-  {
-    id: "layla",
-    name: "Layla Evans",
-    role: "Head of CX",
-    image: "https://i.pravatar.cc/400?img=45",
-    featured: true,
-  },
-  {
-    id: "viola",
-    name: "Viola Bassett",
-    role: "Specialized Support",
-    image: "https://i.pravatar.cc/400?img=32",
-  },
-  {
-    id: "erik",
-    name: "Erik Anders",
-    role: "VP of Customer Success",
-    image: "https://i.pravatar.cc/400?img=51",
-  },
 ];
 
 export const WORKFLOW_STEPS: WorkflowStepData[] = [
