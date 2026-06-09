@@ -1,10 +1,10 @@
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import HeroSection from "../components/home/HeroSection";
-import WorkflowSteps from "../components/home/WorkflowSteps";
-import PerformanceSection from "../components/home/PerformanceSection";
-import PricingSection from "../components/home/PricingSection";
-import FaqSection from "../components/FaqSection";
+import PerformanceSection from "@/components/home/PerformanceSection";
+import PricingSection from "@/components/home/PricingSection";
+import WorkflowSteps from "@/components/home/WorkflowSteps";
+import FaqSection from "@/components/home/FaqSection";
 
 const Home = () => {
   return (
