@@ -15,7 +15,7 @@ const Navbar = () => {
   const ThemeIcon = isDark ? Sun : Moon;
 
   return (
-    <header className="sticky top-0 z-50 rounded-4xl border border-border bg-surface/80 px-4 backdrop-blur-md transition-all duration-300 sm:px-6">
+    <header className="fixed top-5 z-50 w-[94%] rounded-4xl border border-border bg-surface/80 px-4 backdrop-blur-md transition-all duration-300 sm:px-6">
       <nav className="mx-auto flex max-w-6xl items-center justify-between py-1.5">
         <div className="flex items-center gap-7">
           <Link
@@ -24,7 +24,7 @@ const Navbar = () => {
           >
             <span className="flex h-4 w-4 items-center justify-center">
               <GalleryThumbnails className="h-4.5 w-45 drop-shadow-sm" />
-            </span>
+            </span> 
             <span className="text-[11px] font-semibold tracking-tight text-foreground">
               Frame Flow
             </span>
@@ -35,7 +35,7 @@ const Navbar = () => {
               <li key={item.label}>
                 <Link
                   to={item.href}
-                  className="group relative flex items-center justify-center gap-0.5 pb-1 text-[9px] text-foreground transition-colors hover:text-muted-foreground"
+                  className="group relative flex items-center justify-center gap-0.5 pb-1 text-[9px] text-foreground transition-colors hover:text-blue"
                 >
                   {item.label}
                   <div className="absolute left-0 top-3.5 h-px w-0 origin-left rounded-sm bg-foreground opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-full group-hover:opacity-100" />
@@ -140,7 +140,7 @@ const Navbar = () => {
                 <Link
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="group inline-flex items-center justify-center gap-1 py-1 text-[9px] font-medium tracking-wide text-foreground transition-colors hover:text-muted-foreground"
+                  className="group inline-flex items-center justify-center gap-1 py-1 text-[9px] font-medium tracking-wide text-foreground transition-colors hover:text-blue"
                 >
                   {item.label}
                   {item.hasDropdown && (

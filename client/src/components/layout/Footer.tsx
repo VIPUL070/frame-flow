@@ -5,7 +5,7 @@ import { FOOTER_COLUMNS } from "../../data/home";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-surface p-8 px-4 transition-all duration-300 sm:px-6">
+    <footer className="border-t border-border bg-surface p-4 transition-all duration-300 sm:px-4">
       <Reveal>
         <div className="mx-auto max-w-6xl">
           
@@ -14,7 +14,7 @@ const Footer = () => {
               <span className="flex h-4 w-4 items-center justify-center">
                 <GalleryThumbnails className="h-4.5 w-4.5 drop-shadow-sm transition-transform duration-300 group-hover:scale-105" />
               </span>
-              <span className="text-[11px] font-semibold tracking-tight text-foreground">
+              <span className="text-[10px] font-semibold tracking-tight text-foreground">
                 Frame Flow
               </span>
             </Link>
@@ -31,7 +31,7 @@ const Footer = () => {
                     <li key={link.label}>
                       <Link
                         to={link.href}
-                        className="group relative inline-flex items-center pb-0.5 text-[10px] font-medium tracking-tight text-muted-foreground transition-colors duration-200 hover:text-foreground lg:text-[9px]"
+                        className="group relative inline-flex items-center pb-0.5 text-[8px] font-medium tracking-tight text-muted-foreground transition-colors duration-200 hover:text-blue lg:text-[9px]"
                       >
                         {link.label}
                         <div className="absolute bottom-0 left-0 h-px w-0 origin-left rounded-sm bg-foreground opacity-0 transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-full group-hover:opacity-100" />
