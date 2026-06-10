@@ -8,7 +8,7 @@ import Button from "../ui/Button";
 const INITIAL_VISIBLE = 6;
 
 const FaqSection = () => {
-  const [openId, setOpenId] = useState<string>(FAQS[0].id);
+  const [openId, setOpenId] = useState<string>();
   const [showAll, setShowAll] = useState(false);
 
   const visible = showAll ? FAQS : FAQS.slice(0, INITIAL_VISIBLE);

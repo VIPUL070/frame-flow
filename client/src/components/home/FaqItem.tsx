@@ -21,7 +21,7 @@ const FaqItem = ({ faq, isOpen, onToggle }: FaqItemProps) => {
         <span className="flex h-2.5 w-2.5 shrink-0 items-center justify-center rounded-full bg-muted text-foreground">
           <Icon className="h-2.5 w-2.5" />
         </span>
-        <span className="flex-1 text-[10px] font-medium text-foreground hover:text-blue">
+        <span className="flex-1 text-[10px] font-medium text-foreground hover:text-blue cursor-pointer">
           {faq.question}
         </span>
         <motion.span
